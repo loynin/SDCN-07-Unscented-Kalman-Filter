@@ -1,92 +1,106 @@
-# Unscented Kalman Filter Project Starter Code
-Self-Driving Car Engineer Nanodegree Program
+# Self-Driving Car Unscented Kalman Filter -  Part 2
+Udacity Self-Driving Car Nanodegree - Unscented Kalman Filter Implementation
 
-In this project utilize an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project rubric. 
+# Overview
+This project implemented an Unscented Kalman Filter in Self-driving car to track and predict the position of objects around the vehicle. In this project, the UKF system use two sensors data from RADAR and LIDAR measurement for processing UKF. This project used C++ as a programming language because it perform fast and can decrectly interact with the sensors hardware.
 
-This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases)
+# Prerequisites
 
-This repository includes two files that can be used to set up and intall [uWebSocketIO](https://github.com/uWebSockets/uWebSockets) for either Linux or Mac systems. For windows you can use either Docker, VMware, or even [Windows 10 Bash on Ubuntu](https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/) to install uWebSocketIO. Please see [this concept in the classroom](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/16cf4a78-4fc7-49e1-8621-3450ca938b77) for the required version and installation scripts.
+The project has the following dependencies:
 
-Once the install for uWebSocketIO is complete, the main program can be built and ran by doing the following from the project top directory.
-
-1. mkdir build
-2. cd build
-3. cmake ..
-4. make
-5. ./UnscentedKF
-
-Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
-
-Note that the programs that need to be written to accomplish the project are src/ukf.cpp, src/ukf.h, tools.cpp, and tools.h
-
-The program main.cpp has already been filled out, but feel free to modify it.
-
-Here is the main protcol that main.cpp uses for uWebSocketIO in communicating with the simulator.
+- cmake >= 3.5
+- make >= 4.1
+- gcc/g++ >= 5.4
+- Udacity's simulator.
 
 
-INPUT: values provided by the simulator to the c++ program
+For instructions on how to install these components on different operating systems, please, visit [Udacity's seed project](https://github.com/udacity/CarND-Unscented-Kalman-Filter-Project). As this particular implementation was done on Mac OS, the rest of this documentation will be focused on Mac OS.
 
-["sensor_measurement"] => the measurment that the simulator observed (either lidar or radar)
+In order to install the necessary libraries, use the [install-mac.sh](./install-mac.sh).
+
+# Compiling and executing the project
+
+These are the suggested steps:
+
+- Clone the repo and cd to it on a Terminal.
+- Create the build directory: `mkdir build`
+- `cd build`
+- `cmake ..`
+- `make`: This will create an executable file
+- `UnscentedKF` : UKF implementation.
 
 
-OUTPUT: values provided by the c++ program to the simulator
+## Running the Filter
 
-["estimate_x"] <= kalman filter estimated position x
-["estimate_y"] <= kalman filter estimated position y
-["rmse_x"]
-["rmse_y"]
-["rmse_vx"]
-["rmse_vy"]
+From the `build` directory, execute `./UnscentedKF`. The output should be:
+
+```
+Listening to port 4567
+Connected!!!
+```
+
+As you can see, the simulator connect to it right away.
+
+The following is an image of the simulator:
+
+Here is initialized simulator before running against dataset:
+<kbd>
+<img src="images/image1.png" />
+</kbd>
 
 ---
 
-## Other Important Dependencies
-* cmake >= 3.5
-  * All OSes: [click here for installation instructions](https://cmake.org/install/)
-* make >= 4.1 (Linux, Mac), 3.81 (Windows)
-  * Linux: make is installed by default on most Linux distros
-  * Mac: [install Xcode command line tools to get make](https://developer.apple.com/xcode/features/)
-  * Windows: [Click here for installation instructions](http://gnuwin32.sourceforge.net/packages/make.htm)
-* gcc/g++ >= 5.4
-  * Linux: gcc / g++ is installed by default on most Linux distros
-  * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
-  * Windows: recommend using [MinGW](http://www.mingw.org/)
+The default dataset is used for processing the UKF
 
-## Basic Build Instructions
 
-1. Clone this repo.
-2. Make a build directory: `mkdir build && cd build`
-3. Compile: `cmake .. && make`
-4. Run it: `./UnscentedKF` Previous versions use i/o from text files.  The current state uses i/o
-from the simulator.
+Here is the simulator final state after running the UKF with dataset 1:
 
-## Editor Settings
+<kbd>
+<img src="images/image2.png" />
+</kbd>
 
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
+---
 
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
 
-## Code Style
+# Project Requirement:
 
-Please stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html) as much as possible.
+## Compiling
 
-## Generating Additional Data
+### Your code should compile
 
-This is optional!
+The code compiles without errors. I think the code should be compatible with other platforms, but I only test it on Mac OS.
 
-If you'd like to generate your own radar and lidar data, see the
-[utilities repo](https://github.com/udacity/CarND-Mercedes-SF-Utilities) for
-Matlab scripts that can generate additional data.
+## Accuracy
 
-## Project Instructions and Rubric
+### px, py, vx, vy output coordinates must have an RMSE <= [.09, .10, 0.40, 0.30] when using the file: "obj_pose-laser-radar-synthetic-input.txt which is the same data file the simulator uses for Dataset 1"
 
-This information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/c3eb3583-17b2-4d83-abf7-d852ae1b9fff/concepts/f437b8b0-f2d8-43b0-9662-72ac4e4029c1)
-for instructions and the project rubric.
+The UKF accuracy result from running in simulator was:
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+- Dataset 1 : RMSE <= [0.0760, 0.0832, 0.3169, 0.2914]
+
+
+## Initialization parameters
+
+To produce the expected result, the parameters need to initialize with the right number. After spending for a while, the corrected parameters are founded and have been set as in the file src/ukf.cpp from line 17 to line 80.
+
+## Results
+
+Based on the provided data set, my Unscented Kalman Filter will produce the below results. The x-position is shown as 'x', y-position as 'y', velocity in the x-direction is 'vx', while velocity in the y-direction is 'vy'. Residual error is calculated by mean squared error (MSE).
+
+Input    MSE
+x    0.06908
+y    0.07967
+vx    0.16735
+vy    0.20016
+
+## Comparision between EKF and UKF
+
+Input    UKF    UKF-Radar    EKF
+x    0.09346    0.15123    0.13997    0.06908
+y    0.09683    0.19708    0.66551    0.07967
+vx    0.24238    0.20591    0.60388    0.16735
+vy    0.31516    0.24436    1.62373    0.20016
+
+
+
 
