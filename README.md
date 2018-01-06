@@ -64,15 +64,15 @@ Here is the simulator final state after running the UKF with dataset 1:
 
 # Project Requirement:
 
-## Compiling
+### Compiling
 
-### Your code should compile
+##### Your code should compile
 
 The code compiles without errors. I think the code should be compatible with other platforms, but I only test it on Mac OS.
 
-## Accuracy
+### Accuracy
 
-### px, py, vx, vy output coordinates must have an RMSE <= [.09, .10, 0.40, 0.30] when using the file: "obj_pose-laser-radar-synthetic-input.txt which is the same data file the simulator uses for Dataset 1"
+##### px, py, vx, vy output coordinates must have an RMSE <= [.09, .10, 0.40, 0.30] when using the file: "obj_pose-laser-radar-synthetic-input.txt which is the same data file the simulator uses for Dataset 1"
 
 The UKF accuracy result from running in simulator was:
 
@@ -85,21 +85,25 @@ To produce the expected result, the parameters need to initialize with the right
 
 ## Results
 
-Based on the provided data set, my Unscented Kalman Filter will produce the below results. The x-position is shown as 'x', y-position as 'y', velocity in the x-direction is 'vx', while velocity in the y-direction is 'vy'. Residual error is calculated by mean squared error (MSE).
+Based on the provided data set, the Unscented Kalman Filter will produce the below results. The x-position is shown as 'px', y-position as 'py', velocity in the x-direction is 'vx', while velocity in the y-direction is 'vy'. Residual error is calculated by mean squared error (RMSE).
 
-Input    MSE
-x    0.06908
-y    0.07967
-vx    0.16735
-vy    0.20016
+| Input | RMSE |
+|---|---|
+| px | 0.0760 |
+| py |	0.0832 |
+| vx | 0.3169 |
+| vy |	0.2914 |
 
 ## Comparision between EKF and UKF
 
-Input    UKF    UKF-Radar    EKF
-x    0.09346    0.15123    0.13997    0.06908
-y    0.09683    0.19708    0.66551    0.07967
-vx    0.24238    0.20591    0.60388    0.16735
-vy    0.31516    0.24436    1.62373    0.20016
+| Input | UKF | EKF |
+|---|---|---|
+| px | 0.0760 | 0.0973 |
+| py |	0.0832 | 0.0855 |
+| vx | 0.3169 | 0.4513 |
+| vy |	0.2914 | 0.4399 |
+
+From the result of comparision, the UKF has smaller RMSE which can be concluded that the UKF is performed better than EKF.
 
 
 
